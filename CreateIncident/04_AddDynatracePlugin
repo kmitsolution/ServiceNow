@@ -1,0 +1,136 @@
+To add the **Dynatrace Integration** from the **ServiceNow Store**, follow these steps. This integration allows bi-directional communication between ServiceNow and Dynatrace for CMDB syncing, incident creation, and more.
+
+---
+
+## ✅ Step-by-Step: Install Dynatrace Integration from ServiceNow Store
+
+### 🔹 1. **Login to ServiceNow as an Admin**
+
+* You must have the **admin** role or a delegated developer account with sufficient permissions.
+
+---
+
+### 🔹 2. **Navigate to System Applications**
+
+* In the left navigation pane, go to:
+
+  ```
+  System Applications > All Available Applications > All
+  ```
+
+---
+
+### 🔹 3. **Search the ServiceNow Store**
+
+* Click on the **"ServiceNow Store"** link at the top of the screen to open the external Store portal in a new tab.
+
+---
+
+### 🔹 4. **Search for Dynatrace**
+
+* In the Store search bar, type:
+
+  ```
+  Dynatrace
+  ```
+* Look for:
+
+  * **Dynatrace Integration for ITOM** (developed by Dynatrace or a partner)
+  * App name might be:
+
+    * `Dynatrace Integration`
+    * `Dynatrace Events Integration`
+    * `Dynatrace CMDB Integration`
+    * Publisher: Dynatrace LLC
+
+---
+
+### 🔹 5. **Request or Install the App**
+
+* If the app is **free**:
+
+  * Click **Get** or **Install**.
+* If approval is required:
+
+  * Click **Request App** — this sends a request to your ServiceNow admin team (if you're not the admin).
+
+> 🔐 **You’ll need to be logged in to the Store with your ServiceNow HI credentials.** If you don’t have access, contact your ServiceNow administrator or platform owner.
+
+---
+
+### 🔹 6. **Complete Installation**
+
+* Once the request is approved or the app is ready:
+
+  * Go back to **System Applications > Downloads**.
+  * Click **Install** next to the Dynatrace Integration app.
+
+---
+
+### 🔹 7. **Post-Installation Setup**
+
+After installing the app, configure it:
+
+1. **Create Integration User (`dynatrace_integration`)**.
+2. **Assign Roles** (as listed in the previous message).
+3. **Configure Dynatrace Credentials** in:
+
+   * `Dynatrace Integration > Configuration`
+4. **Activate Scheduled Jobs** or data sources as needed.
+
+---
+
+### 🔧 Optional (for older versions or on-prem):
+
+If your instance doesn't show the app, you may need to:
+
+* Upgrade your instance to a **supported version**.
+* Contact Dynatrace for a **manual update set** if they offer one.
+
+---
+
+
+
+To create a `dynatrace_integration` user in **ServiceNow** for integrating with **Dynatrace**, you need to assign specific roles that allow the user to access, read, and write the necessary ITOM and CMDB data. This user acts as the bridge for Dynatrace to interact with ServiceNow's Configuration Management Database (CMDB), incidents, and other ITSM functions.
+
+### ✅ Steps to Create the `dynatrace_integration` User:
+
+1. **Navigate to Users**:
+
+   * Go to **User Administration > Users** in ServiceNow.
+   * Click **New** to create a new user.
+   * Fill in the basic details:
+
+     * **User ID**: `dynatrace_integration`
+     * **Name**: Dynatrace Integration User
+     * Assign a strong **password**.
+
+2. **Assign the following roles** to the user:
+
+### 🔐 Required Roles for Dynatrace Integration
+
+| Role                     | Purpose                                                                                                       |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| `x_dynat_ruxit.admin`    | **Dynatrace-specific role** to allow full access to the Dynatrace integration app.                            |
+| `itil`                   | Grants basic access to incident, problem, and change records. Required for creating incidents from Dynatrace. |
+| `rest_api_explorer`      | Optional, allows use of REST API Explorer for testing.                                                        |
+| `web_service_admin`      | Required for access to integration web services.                                                              |
+| `import_transformer`     | Required for using Import Sets to push CMDB data.                                                             |
+| `soap`                   | Grants access to SOAP services, useful if your integration uses SOAP.                                         |
+| `x_dynat_ruxit.user`     | Dynatrace user role with limited access, sometimes needed depending on the use case.                          |
+| `cmdb_read`              | Allows reading of CMDB records.                                                                               |
+| `cmdb_ci_user`           | Access to CI classes and relationships.                                                                       |
+| `sn_cmdb_admin`          | (If needed) More powerful role for CMDB manipulation. Use with caution.                                       |
+| `personalize_dictionary` | (Optional) Required if the integration modifies dictionary entries.                                           |
+
+---
+
+> 🛑 **Important Notes:**
+
+* Make sure the **Dynatrace Integration App** is installed from the ServiceNow Store (search for "Dynatrace for ITOM").
+* Avoid assigning the `admin` role unless you are testing or troubleshooting — it’s best practice to follow **least privilege principles**.
+* Role names can vary slightly depending on the **version of ServiceNow** and the **Dynatrace app version**.
+
+---
+
+
